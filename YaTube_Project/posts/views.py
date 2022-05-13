@@ -1,8 +1,18 @@
+from re import template
+from turtle import title
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse('Главная страница')
+    template = 'base.html'
+    title = 'YaTube'
+    text = 'Это главная страница проекта Yatube'
+    context = {
+        'title': title,
+        'text': text,
+    }
+    return render(request, template, context)
 
 
 def all_groups(request):
@@ -10,4 +20,12 @@ def all_groups(request):
 
 
 def group_posts(request, slug):
-    return HttpResponse(f'Группа YaTube: {slug}')
+    template = 'posts/group_list.html'
+    title = 'YaTube'
+    text = 'Здесь будет информация о группах проекта Yatube '
+    context = {
+        'title': title,
+        'text': text,
+    }
+
+    return render(request, template, slug, context)
